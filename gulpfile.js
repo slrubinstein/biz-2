@@ -7,6 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var inject = require('gulp-inject');
+var angularFilesort = require('gulp-angular-filesort');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -40,9 +41,10 @@ gulp.task('install', ['git-check'], function() {
 
 gulp.task('index', function () {
   var target = gulp.src('./www/index.html');
-  var sources = gulp.src(['./www/**/*.js', '!./www/lib/**/*'], {read: false});
+  var sources = gulp.src(['./www/**/*.js', '!./www/lib/**/*'])
+    .pipe(angularFilesort());
 
-  return target.pipe(inject(sources))
+  return target.pipe(inject(sources, {relative: true}))
     .pipe(gulp.dest('./www'));
 });
 
