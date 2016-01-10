@@ -20,7 +20,7 @@ angular.module('bizCard')
   function logIn() {
     User.logIn(vm.credentials, function(authData) {
       console.log(authData);
-      $state.go('tab.dash');
+      $state.go('tab.profile');
     }, function(error) {
       vm.error = error;
     });
