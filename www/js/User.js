@@ -1,9 +1,10 @@
-angular.module('starter')
+angular.module('bizCard')
 .factory("User", function(Auth) {
 
 	return {
 		createAccount: createAccount,
-		logIn: logIn
+		logIn: logIn,
+		logOut: logOut
 	};
 
 	function createAccount(credentials) {
@@ -17,15 +18,21 @@ angular.module('starter')
 		});
 	}
 
-	function logIn(credentials) {
-		Auth.$authWithPassword({
+	function logIn(credentials, successCallback, errorCallback) {
+		return Auth.$authWithPassword({
 		  email: credentials.email,
 		  password: credentials.password
 		}).then(function(authData) {
 		  console.log("Logged in as:", authData.uid);
+		  successCallback(authData);
 		}).catch(function(error) {
 		  console.error("Authentication failed:", error);
+		  errorCallback(error);
 		});
+	}
+
+	function logOut() {
+		return Auth.$unauth();
 	}
 
 });

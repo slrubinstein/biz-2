@@ -11,10 +11,10 @@ var angularFilesort = require('gulp-angular-filesort');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  js: ['./www/js']
+  js: ['www/js']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'index']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
