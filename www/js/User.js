@@ -3,6 +3,7 @@ angular.module('bizCard')
 
 	return {
 		createAccount: createAccount,
+		getUser: getUser,
 		logIn: logIn,
 		logOut: logOut
 	};
@@ -16,6 +17,11 @@ angular.module('bizCard')
 		}).catch(function(error) {
 		  console.error("Authentication failed:", error);
 		});
+	}
+
+	function getUser() {
+		var authData = Auth.$getAuth();
+		return authData;
 	}
 
 	function logIn(credentials, successCallback, errorCallback) {
