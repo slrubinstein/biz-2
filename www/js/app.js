@@ -33,8 +33,6 @@ angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', '
     templateUrl: 'templates/tabs.html'
   })
 
-  // Each tab has its own nav history stack:
-
   .state('tab.profile', {
     url: '/profile',
     views: {
