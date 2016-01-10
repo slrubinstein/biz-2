@@ -1,7 +1,7 @@
 <ion-view view-title="Log In">
   <ion-content>
-    email<input ng-model="login.credentials.email" type="text" / >
-    password<input ng-model="login.credentials.password" type="text" / >
+    email<input ng-model="login.credentials.email" type="email" / >
+    password<input ng-model="login.credentials.password" type="password" / >
     <button ng-click="login.createAccount()">Create account</button>
     <button ng-click="login.logIn()">Log in</button>
     <div>{{login.error.code}}</div>
