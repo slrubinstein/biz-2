@@ -5,5 +5,9 @@
         Enable Friends
     </ion-toggle>
     </ion-list>
+    email<input ng-model="credentials.email" type="text" / >
+    password<input ng-model="credentials.password" type="text" / >
+    <button ng-click="createAccount()">Create account</button>
+    <button ng-click="logIn()">Log in</button>
   </ion-content>
 </ion-view>

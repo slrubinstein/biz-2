@@ -10,7 +10,8 @@ var inject = require('gulp-inject');
 var angularFilesort = require('gulp-angular-filesort');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+  sass: ['./scss/**/*.scss'],
+  js: ['./www/js']
 };
 
 gulp.task('default', ['sass']);
@@ -30,6 +31,7 @@ gulp.task('sass', function(done) {
 
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.js, ['index']);
 });
 
 gulp.task('install', ['git-check'], function() {
