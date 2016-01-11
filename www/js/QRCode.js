@@ -1,5 +1,5 @@
 angular.module('bizCard')
-.factory("QRCode", function() {
+.factory('QRCode', function() {
 
   return {
   	createQR: createQR,
@@ -14,7 +14,7 @@ angular.module('bizCard')
   	try {
     	cordova.plugins.barcodeScanner.scan(successCallback, errorCallback);
   	} catch(e) {
-  		console.log(e);
+  		console.log('Scanning not supported on desktop');
   	}
   }
 

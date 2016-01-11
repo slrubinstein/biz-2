@@ -1,5 +1,5 @@
 angular.module('bizCard')
-.factory("User", function(Auth) {
+.factory('User', function(Auth) {
 
 	return {
 		createAccount: createAccount,
@@ -13,9 +13,9 @@ angular.module('bizCard')
 		  email: credentials.email,
 		  password: credentials.password
 		}).then(function(authData) {
-		  console.log("Logged in as:", authData.uid);
+		  console.log('Logged in as:', authData.uid);
 		}).catch(function(error) {
-		  console.error("Authentication failed:", error);
+		  console.error('Authentication failed:', error);
 		});
 	}
 
@@ -29,10 +29,10 @@ angular.module('bizCard')
 		  email: credentials.email,
 		  password: credentials.password
 		}).then(function(authData) {
-		  console.log("Logged in as:", authData.uid);
+		  console.log('Logged in as:', authData.uid);
 		  successCallback(authData);
 		}).catch(function(error) {
-		  console.error("Authentication failed:", error);
+		  console.error('Authentication failed:', error);
 		  errorCallback(error);
 		});
 	}
