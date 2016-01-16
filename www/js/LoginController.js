@@ -1,9 +1,8 @@
 angular.module('bizCard')
 
-.controller('LoginCtrl', function($state, Auth, User) {
+.controller('LoginCtrl', function($state, Auth, Users) {
   var vm = this;
 
-  vm.authObj = Auth;
   vm.createAccount = createAccount;
   vm.error = '';
   vm.logIn = logIn;
@@ -13,17 +12,32 @@ angular.module('bizCard')
     password: ''
   };
 
+  function addNewUser(uid) {
+    Users.addUser(uid)
+  }
+
   function createAccount() {
-    User.createAccount(vm.credentials)
+    Auth.createAccount(vm.credentials, createAccountSuccess, function(error) {
+      console.error(error);
+    });
+  }
+
+  function createAccountSuccess(uid) {
+    addNewUser(uid);
+    navigateToProfile();
   }
 
   function logIn() {
-    User.logIn(vm.credentials, function(authData) {
+    Auth.logIn(vm.credentials, function(authData) {
       console.log(authData);
-      $state.go('tab.profile');
+      navigateToProfile();
     }, function(error) {
       vm.error = error;
     });
+  }
+
+  function navigateToProfile() {
+    $state.go('tab.profile');
   }
 
 });

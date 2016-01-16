@@ -2,6 +2,44 @@
   <ion-content class="padding">
     <h2>Create Your BizCard</h2>
 
+		<div class="list list-inset">
+		  <label class="item item-input">
+		    <input 
+		    	ng-model="profile.card.name"
+		    	type="text" 
+		    	placeholder="Name">
+		  </label>
+		  <label class="item item-input">
+		    <input 
+		    	ng-model="profile.card.email"
+		    	type="text" 
+		    	placeholder="Email">
+		  </label>
+		  <label class="item item-input">
+		    <input 
+		    	ng-model="profile.card.title"
+		    	type="text" 
+		    	placeholder="Title">
+		  </label>
+		</div>
+
+
+		<button ng-click="profile.saveCard()" class="button button-positive">
+		  Save
+		</button>
+
+		<div>
+			<h2>
+				{{profile.card.name}}
+			</h2>
+			<h3>
+				{{profile.card.email}}
+			</h3>
+			<p>
+				{{profile.card.title}}
+			</p>
+
+		</div>
 
     <button ng-click="profile.logOut()">Log Out</button>
   </ion-content>

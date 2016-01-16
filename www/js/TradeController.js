@@ -1,6 +1,6 @@
 angular.module('bizCard')
 
-.controller('TradeCtrl', function($state, Auth, User, QRCode) {
+.controller('TradeCtrl', function($state, Auth, Users, QRCode) {
   
   var vm = this;
 
@@ -11,7 +11,7 @@ angular.module('bizCard')
   init();
 
   function init() {
-		vm.authData = User.getUser();
+		vm.authData = Users.getUser();
   	QRCode.createQR('qr-code', vm.authData.uid);
   }
 

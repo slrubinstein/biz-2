@@ -14,7 +14,7 @@ var paths = {
   js: ['www/js']
 };
 
-gulp.task('default', ['sass', 'index']);
+gulp.task('default', ['sass', 'index', 'watch']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
