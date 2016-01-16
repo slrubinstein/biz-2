@@ -31,8 +31,8 @@ angular.module('bizCard')
 		  email: credentials.email,
 		  password: credentials.password
 		}).then(function(authData) {
-		  console.log('Logged in as:', authData.uid);
-		  successCallback(authData);
+		  console.log('Logged in as:', authData);
+		  successCallback(authData.uid);
 		}).catch(function(error) {
 		  console.error('Authentication failed:', error);
 		  errorCallback(error);

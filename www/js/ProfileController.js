@@ -8,9 +8,10 @@ angular.module('bizCard')
   vm.saveCard = saveCard;
 
 
-  // init();
+  init();
 
   function init() {
+  	debugger
   	vm.card = new CardModel(Users.getUser().uid);
   }
 
@@ -20,7 +21,23 @@ angular.module('bizCard')
   }
 
   function saveCard() {
-  	Cards.saveCard(vm.card);
+  	Cards.saveCard(vm.card)
+  	.then(function(ref) {
+  		saveCardToUser(ref.key());
+  	}, function(error) {
+
+  	});
+  }
+
+  function saveCardToUser(key) {
+  	Users.updateUser({
+  		card: key
+  	})
+  	.then(function(ref) {
+  		console.log('saved', ref);
+  	}, function(error) {
+  		console.error(error);
+  	});
   }
 
 });

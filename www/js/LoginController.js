@@ -27,13 +27,19 @@ angular.module('bizCard')
     navigateToProfile();
   }
 
+  function setUser(uid) {
+    Users.setUser(uid);
+  }
+
   function logIn() {
-    Auth.logIn(vm.credentials, function(authData) {
-      console.log(authData);
-      navigateToProfile();
-    }, function(error) {
+    Auth.logIn(vm.credentials, logInSuccess, function(error) {
       vm.error = error;
     });
+  }
+
+  function logInSuccess(uid) {
+    setUser(uid);
+    navigateToProfile();
   }
 
   function navigateToProfile() {

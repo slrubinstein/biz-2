@@ -8,20 +8,19 @@ angular.module('bizCard')
   };
 
   function _addCard(card) {
-  	cards.$add(card).then(function(ref) {
-  		console.log('card saved as', ref);
-  	}, function(error) {
-  		console.error('error saving card:', error);
-  	});
+  	return cards.$add(card);
   }
 
   function saveCard(card) {
   	if (Users.hasCard()) {
-  		_updateCard(card);
+  		return _updateCard(card);
   	} else {
-  		_addCard(card);
+  		return _addCard(card);
   	}
   }
 
+  function saveCardToUserSuccess() {
+  	console.log('card saved to user');
+  }
 
 });

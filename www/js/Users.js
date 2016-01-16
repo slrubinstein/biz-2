@@ -8,7 +8,10 @@ angular.module('bizCard')
 
 	return {
 		addUser: addUser,
-		getUser: getUser
+		getUser: getUser,
+		hasCard: hasCard,
+		setUser: setUser,
+		updateUser: updateUser
 	};
 
 	function addUser(uid) {
@@ -18,22 +21,28 @@ angular.module('bizCard')
 	}
 
 	function hasCard() {
-		return getUser();
+		return !!getUser().card;
+	}
+
+	function findUserByUid(uid) {
+		return _.find(users, function(u) { return u.uid === uid });
 	}
 
 	function getUser() {
-		// return angular.equals({}, user) ? Auth.getUser() : user;
+		return angular.equals({}, user) ? Auth.getAuth() : user;
+	}
+
+	function setUser(uid) {
+		return findUserByUid(uid);
 	}
 
 	function updateUser(data) {
-		var index = users.$indexFor(getUser().uid);
+		// there must be a better way to do this
+		var uid = getUser().uid;
+		var $id = findUserByUid(uid).$id;
+		var index = users.$indexFor($id);
 		angular.extend(users[index], data);
-		users.$save(index)
-		.then(function(ref) {
-
-		}, function(error) {
-
-		});
+		return users.$save(index);
 	}
 
 });
