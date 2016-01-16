@@ -1,6 +1,6 @@
 angular.module('bizCard')
 
-.controller('LoginCtrl', function($state, Auth, Users) {
+.controller('LoginCtrl', function($rootScope, $state, Auth, Users) {
   var vm = this;
 
   vm.createAccount = createAccount;
@@ -16,6 +16,10 @@ angular.module('bizCard')
     Users.addUser(uid)
   }
 
+  function broadcastLogin() {
+    $rootScope.$emit('login');
+  }
+
   function createAccount() {
     Auth.createAccount(vm.credentials, createAccountSuccess, function(error) {
       console.error(error);
@@ -25,6 +29,7 @@ angular.module('bizCard')
   function createAccountSuccess(uid) {
     addNewUser(uid);
     navigateToProfile();
+    broadcastLogin();
   }
 
   function setUser(uid) {
@@ -40,6 +45,7 @@ angular.module('bizCard')
   function logInSuccess(uid) {
     setUser(uid);
     navigateToProfile();
+    broadcastLogin();
   }
 
   function navigateToProfile() {

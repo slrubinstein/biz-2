@@ -1,7 +1,8 @@
 angular.module('bizCard')
 
-.controller('ProfileCtrl', function($state, Users, Cards, CardModel, Auth) {
+.controller('ProfileCtrl', function($rootScope, $state, Users, Cards, CardModel, Auth) {
   var vm = this;
+  var loginListener;
 
   vm.card;
   vm.logOut = logOut;
@@ -11,8 +12,23 @@ angular.module('bizCard')
   init();
 
   function init() {
-  	debugger
-  	vm.card = new CardModel(Users.getUser().uid);
+  	if (loginListener) {
+  		loginListener();
+  	}
+  	
+  	loginListener = $rootScope.$on('login', function() {
+  		init();
+  	});
+
+  	if (!Users.getUser()) {
+  		return $state.go('login');
+  	}
+
+  	if (Users.hasCard()) {
+  		vm.card = Cards.getCardByKey(Users.getUser().card);
+  	} else {
+  		vm.card = new CardModel(Users.getUser().$id);
+  	}
   }
 
   function logOut() {

@@ -17,6 +17,8 @@ angular.module('bizCard')
 	function addUser(uid) {
 		users.$add({
 			uid: uid
+		}).then(function(ref) {
+			debugger;
 		});
 	}
 
@@ -29,7 +31,7 @@ angular.module('bizCard')
 	}
 
 	function getUser() {
-		return angular.equals({}, user) ? Auth.getAuth() : user;
+		return angular.equals({}, user) ? setUser(Auth.getAuth().uid) : user;
 	}
 
 	function setUser(uid) {

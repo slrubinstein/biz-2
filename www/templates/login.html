@@ -1,9 +1,31 @@
-<ion-view view-title="Log In">
-  <ion-content>
-    email<input ng-model="login.credentials.email" type="email" / >
-    password<input ng-model="login.credentials.password" type="password" / >
-    <button ng-click="login.createAccount()">Create account</button>
-    <button ng-click="login.logIn()">Log in</button>
+<ion-view view-title="Log In To BizCard">
+  <ion-content class="padding">
+
+		<div class="list list-inset">
+		  <label class="item item-input">
+		    <input 
+		    	ng-model="login.credentials.name"
+		    	type="text" 
+		    	placeholder="Name">
+		  </label>
+		  <label class="item item-input">
+		    <input 
+		    	ng-model="login.credentials.email"
+		    	type="email" 
+		    	placeholder="Email">
+		  </label>
+		  <label class="item item-input">
+		    <input 
+		    	ng-model="login.credentials.password"
+		    	type="password" 
+		    	placeholder="Password">
+		  </label>
+		</div>
+
+    <button ng-click="login.createAccount()" class="button button-positive">Create account</button>
+
+    <button ng-click="login.logIn()" class="button button-positive">Log in</button>
+
     <div>{{login.error.code}}</div>
   </ion-content>
 </ion-view>

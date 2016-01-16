@@ -4,11 +4,16 @@ angular.module('bizCard')
   var cards = $firebaseArray(cardsRef);
 
   return {
+  	getCardByKey: getCardByKey,
   	saveCard: saveCard
   };
 
   function _addCard(card) {
   	return cards.$add(card);
+  }
+
+  function getCardByKey(key) {
+  	return cards.$getRecord(key);
   }
 
   function saveCard(card) {
@@ -21,6 +26,10 @@ angular.module('bizCard')
 
   function saveCardToUserSuccess() {
   	console.log('card saved to user');
+  }
+
+  function _updateCard(card) {
+
   }
 
 });
