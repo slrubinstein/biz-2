@@ -18,12 +18,12 @@ angular.module('bizCard')
 		users.$add({
 			uid: uid
 		}).then(function(ref) {
-			debugger;
+			setUser(users.$getRecord(ref.key()).uid);
 		});
 	}
 
 	function hasCard() {
-		return !!getUser().card;
+		return !!angular.equals({}, getUser().card);
 	}
 
 	function findUserByUid(uid) {
@@ -35,7 +35,7 @@ angular.module('bizCard')
 	}
 
 	function setUser(uid) {
-		return findUserByUid(uid);
+		return user = findUserByUid(uid);
 	}
 
 	function updateUser(data) {
