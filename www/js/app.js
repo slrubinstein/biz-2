@@ -1,6 +1,6 @@
 angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', 'firebase'])
 
-.run(function($ionicPlatform) {
+.run(function($rootScope, $state, $ionicPlatform, Auth) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,6 +14,15 @@ angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleDefault();
     }
   });
+
+  $rootScope.$on('$stateChangeStart', function (event, next) {
+    if (next.requiresAuth) {
+      if (!Auth.getAuth()) {
+        event.preventDefault();
+        $state.go('login');
+      }
+    }
+  });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -23,6 +32,7 @@ angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', '
 
   .state('login', {
     url: '/login',
+    requiresAuth: false,
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl as login'
   })
@@ -35,6 +45,7 @@ angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', '
 
   .state('tab.profile', {
     url: '/profile',
+    requiresAuth: true,
     views: {
       'tab-profile': {
         templateUrl: 'templates/tab-profile.html',
@@ -45,6 +56,7 @@ angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', '
 
   .state('tab.contacts', {
       url: '/contacts',
+      requiresAuth: true,
       views: {
         'tab-contacts': {
           templateUrl: 'templates/tab-contacts.html',
@@ -54,6 +66,7 @@ angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', '
     })
     .state('tab.contact-detail', {
       url: '/contacts/:contactId',
+      requiresAuth: true,
       views: {
         'tab-contacts': {
           templateUrl: 'templates/contact-detail.html',
@@ -64,6 +77,7 @@ angular.module('bizCard', ['ionic', 'starter.controllers', 'starter.services', '
 
   .state('tab.trade', {
       url: '/trade',
+      requiresAuth: true,
       views: {
         'tab-trade': {
           templateUrl: 'templates/tab-trade.html',

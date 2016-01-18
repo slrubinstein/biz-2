@@ -12,14 +12,6 @@ angular.module('bizCard')
   init();
 
   function init() {
-  	if (loginListener) {
-  		loginListener();
-  	}
-  	
-  	loginListener = $rootScope.$on('login', function() {
-  		init();
-  	});
-
   	if (!Users.getUser()) {
   		return $state.go('login');
   	}
